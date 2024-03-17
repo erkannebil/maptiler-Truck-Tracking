@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import { blue } from '@mui/material/colors';
+import { Button } from '@mui/material';
 
 const sample = [
   ['Kamyon-x', 'Label', 'Truck'],
@@ -89,7 +90,7 @@ function rowContent(_index, row) {
         if (column.dataKey === 'action') {
           return (
             <TableCell key={column.dataKey}>
-              <button onClick={() => handleSeferlerClick(row)}>Seferler</button>
+              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Seferler</Button>
             </TableCell>
           );
         } else {

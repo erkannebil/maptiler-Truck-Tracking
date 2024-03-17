@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import { blue } from '@mui/material/colors';
+import { Button } from '@mui/material';
 
 const sample = [
   ['Sefer-1', 'Label', 'Features'],
@@ -89,7 +90,7 @@ function rowContent(_index, row) {
         if (column.dataKey === 'action') {
           return (
             <TableCell key={column.dataKey}>
-              <button onClick={() => handleSeferlerClick(row)}>Koordinatlar</button>
+              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Göster</Button>
             </TableCell>
           );
         } else {
@@ -108,7 +109,7 @@ function rowContent(_index, row) {
 }
 
 function handleSeferlerClick(row) {
-  console.log("Seferler button clicked for row:", row);
+  console.log("Map data button clicked for row:", row);
 }
 
 export default function ReactVirtualizedTable() {
