@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react'; 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
-import { blue } from '@mui/material/colors';
 import { Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 const sample = [
   ['Kamyon-x', 'Label', 'Truck'],
@@ -90,7 +91,7 @@ function rowContent(_index, row) {
         if (column.dataKey === 'action') {
           return (
             <TableCell key={column.dataKey}>
-              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Seferler</Button>
+              <Button variant="outlined" component={Link} to={`/mapPage/${row.truckName}`}>Trips</Button>
             </TableCell>
           );
         } else {
@@ -106,10 +107,6 @@ function rowContent(_index, row) {
       })}
     </React.Fragment>
   );
-}
-
-function handleSeferlerClick(row) {
-  console.log("Seferler button clicked for row:", row);
 }
 
 export default function ReactVirtualizedTable() {

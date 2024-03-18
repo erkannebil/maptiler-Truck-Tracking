@@ -7,23 +7,33 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
-import { blue } from '@mui/material/colors';
 import { Button } from '@mui/material';
 
+
+var coordinatesData = {
+  "type": "FeatureCollection",
+  "name": "Path Test",
+  "features": [
+    { "type": "Feature", "properties": { "Name": "Line 1" }, "geometry": { "type": "LineString", "coordinates": [[27.8908299, 37.1600766], [27.8929757, 37.1592216], [27.8944348, 37.156588], [27.8947781, 37.1528598], [27.8955077, 37.15156], [27.8962801, 37.1501576], [27.8962372, 37.1469764]] } },
+    { "type": "Feature", "properties": { "Name": "Line 2" }, "geometry": { "type": "LineString", "coordinates": [[27.8982113, 37.1495419], [27.896881, 37.1530308], [27.8958081, 37.1538175], [27.8912161, 37.1560408]] } },
+    { "type": "Feature", "properties": { "Name": "Line 3" }, "geometry": { "type": "LineString", "coordinates": [[27.8950356, 37.1600766], [27.895336, 37.1571695], [27.895851, 37.1547068], [27.8982113, 37.1530308], [27.8994988, 37.1499523], [27.898383, 37.1480026]] } }
+  ]
+};
+
 const sample = [
-  ['Sefer-1', 'Label', 'Features'],
-  ['Sefer-2', 'Label', 'Features'],
-  ['Sefer-3', 'Label', 'Features'],
+  ['Sefer-1', 'Label', coordinatesData],
+  ['Sefer-2', 'Label', coordinatesData],
+  ['Sefer-3', 'Label', coordinatesData],
 ];
 
-function createData(id, Name, label, type) {
-  return { id, Name, label, type };
+function createData(id, Name, label, features) {
+  return { id, Name, label, features };
 }
 
 const columns = [
   {
     width: 200,
-    label: 'Kamyon Adı',
+    label: 'Sefer Adı',
     dataKey: 'Name',
   },
   {
@@ -34,8 +44,8 @@ const columns = [
   },
   {
     width: 120,
-    label: 'Type',
-    dataKey: 'type',
+    label: 'Features',
+    dataKey: 'Coordinates',
     numeric: false,
   },
   {
@@ -90,7 +100,16 @@ function rowContent(_index, row) {
         if (column.dataKey === 'action') {
           return (
             <TableCell key={column.dataKey}>
-              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Göster</Button>
+              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Show</Button>
+            </TableCell>
+          );
+        } else if (column.dataKey === 'Coordinates') {
+          return (
+            <TableCell
+              key={column.dataKey}
+              align={column.numeric || false ? 'right' : 'left'}
+            >
+              Coordinates
             </TableCell>
           );
         } else {
@@ -109,12 +128,11 @@ function rowContent(_index, row) {
 }
 
 function handleSeferlerClick(row) {
-  console.log("Map data button clicked for row:", row);
+  console.log("Map data button clicked for row:", row)
+  ;
 }
 
-export default function ReactVirtualizedTable() {
-  const [rowData, setRowData] = useState(' ');
-
+export default function ReactVirtualizedTable(row) {
   return (
     <Paper style={{ height: 720, width: '50%' , padding: 5,border: '2px solid black',borderRadius: 20 ,marginLeft: 5, marginRight: 5,marginTop: 8}}>
 
