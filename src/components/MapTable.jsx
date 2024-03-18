@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,20 +10,31 @@ import { TableVirtuoso } from 'react-virtuoso';
 import { Button } from '@mui/material';
 
 
-var coordinatesData = {
+var line1 = {
   "type": "FeatureCollection",
   "name": "Path Test",
   "features": [
-    { "type": "Feature", "properties": { "Name": "Line 1" }, "geometry": { "type": "LineString", "coordinates": [[27.8908299, 37.1600766], [27.8929757, 37.1592216], [27.8944348, 37.156588], [27.8947781, 37.1528598], [27.8955077, 37.15156], [27.8962801, 37.1501576], [27.8962372, 37.1469764]] } },
-    { "type": "Feature", "properties": { "Name": "Line 2" }, "geometry": { "type": "LineString", "coordinates": [[27.8982113, 37.1495419], [27.896881, 37.1530308], [27.8958081, 37.1538175], [27.8912161, 37.1560408]] } },
-    { "type": "Feature", "properties": { "Name": "Line 3" }, "geometry": { "type": "LineString", "coordinates": [[27.8950356, 37.1600766], [27.895336, 37.1571695], [27.895851, 37.1547068], [27.8982113, 37.1530308], [27.8994988, 37.1499523], [27.898383, 37.1480026]] } }
+    { "type": "Feature", "properties": { "Name": "Line 1" }, "geometry": { "type": "LineString", "coordinates": [[27.8908299, 37.1600766], [27.8929757, 37.1592216], [27.8944348, 37.156588], [27.8947781, 37.1528598], [27.8955077, 37.15156], [27.8962801, 37.1501576], [27.8962372, 37.1469764]] } }
   ]
 };
+var line2 = {
+  "type": "FeatureCollection",
+  "name": "Path Test",
+  "features": [
+    { "type": "Feature", "properties": { "Name": "Line 2" }, "geometry": { "type": "LineString", "coordinates": [ [ 27.8982113, 37.1495419 ], [ 27.896881, 37.1530308 ], [ 27.8958081, 37.1538175 ], [ 27.8912161, 37.1560408 ] ] } }]
+  };
+var line3 = {
+  "type": "FeatureCollection",
+  "name": "Path Test",
+  "features": [
+  { "type": "Feature", "properties": { "Name": "Line 3" }, "geometry": { "type": "LineString", "coordinates": [ [ 27.8950356, 37.1600766 ], [ 27.895336, 37.1571695 ], [ 27.895851, 37.1547068 ], [ 27.8982113, 37.1530308 ], [ 27.8994988, 37.1499523 ], [ 27.898383, 37.1480026 ] ] } }
+  ]
+  };
 
 const sample = [
-  ['Sefer-1', 'Label', coordinatesData],
-  ['Sefer-2', 'Label', coordinatesData],
-  ['Sefer-3', 'Label', coordinatesData],
+  ['Sefer-1', 'Label', line1],
+  ['Sefer-2', 'Label', line2],
+  ['Sefer-3', 'Label', line3],
 ];
 
 function createData(id, Name, label, features) {
@@ -93,14 +104,14 @@ function fixedHeaderContent() {
   );
 }
 
-function rowContent(_index, row) {
+function rowContent(_index, row, props) {
   return (
     <React.Fragment>
       {columns.map((column) => {
         if (column.dataKey === 'action') {
           return (
             <TableCell key={column.dataKey}>
-              <Button variant="outlined" onClick={() => handleSeferlerClick(row)}>Show</Button>
+              <Button variant="outlined" onClick={() => props.showClick(row)}>Show</Button>
             </TableCell>
           );
         } else if (column.dataKey === 'Coordinates') {
@@ -127,21 +138,17 @@ function rowContent(_index, row) {
   );
 }
 
-function handleSeferlerClick(row) {
-  console.log("Map data button clicked for row:", row)
-  ;
-}
 
-export default function ReactVirtualizedTable(row) {
+export default function ReactVirtualizedTable(props) {
   return (
-    <Paper style={{ height: 720, width: '50%' , padding: 5,border: '2px solid black',borderRadius: 20 ,marginLeft: 5, marginRight: 5,marginTop: 8}}>
+    <Paper style={{ height: 720, width: '50%', padding: 5, border: '2px solid black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
 
-      
+
       <TableVirtuoso
         data={rows}
         components={VirtuosoTableComponents}
         fixedHeaderContent={fixedHeaderContent}
-        itemContent={rowContent}
+        itemContent={(index, row) => rowContent(index, row, props)}
       />
     </Paper>
   );
