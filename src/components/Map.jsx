@@ -3,6 +3,7 @@ import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import '../components/cssFiles/map.css';
 
+
 export default function Map({ coordinatesData }) {
   const mapContainer = useRef(null);
   const map = useRef(null);

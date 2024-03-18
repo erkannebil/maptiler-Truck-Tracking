@@ -5,14 +5,18 @@ import '../components/cssFiles/mapPage.css';
 
 function MapPage() {
     const [coordinatesData, setCoordinatesData] = useState('');
+    const [mapKey, setMapKey] = useState(0); // Anahtar için state oluştur
 
     useEffect(() => {
         console.log("showClick tetiklendi:", coordinatesData);
     }, [coordinatesData]); 
 
-    function showClick(row) {
-        setCoordinatesData(row.features);
+    async function showClick(row) {
+        const newCoordinatesData = row.features;
+        setCoordinatesData(newCoordinatesData);
+        setMapKey(prevKey => prevKey + 1); // Anahtar değerini güncelle
     }
+    
 
     return (
         <div className='main-container'>
@@ -20,7 +24,7 @@ function MapPage() {
                 <TableContainer showClick={showClick} />
             </div>
             <div className='right-part'>
-                <Map coordinatesData={coordinatesData} />
+                <Map key={mapKey} coordinatesData={coordinatesData} /> {/* Anahtarı Map bileşenine geçir */}
             </div>
         </div>
     );
