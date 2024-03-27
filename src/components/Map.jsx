@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as maptilersdk from '@maptiler/sdk';
 import "@maptiler/sdk/dist/maptiler-sdk.css";
-import '../components/cssFiles/map.css';
+
 
 
 export default function Map({ coordinatesData }) {
@@ -43,8 +43,9 @@ export default function Map({ coordinatesData }) {
   }, [turkey.lng, turkey.lat, zoom, coordinatesData]); 
 
   return (
-    <div className="map-wrap" style={{ position: 'absolute', bottom: 0, right: 0, height: 740, width: '49%', padding: 5, marginRight: 10 }}>
-      <div ref={mapContainer} className="map" />
+    <div className="map-wrap"  >
+      <div  style={{ height: 720, width: '98%', padding: 5, border: '2px solid black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}
+       ref={mapContainer} className="map" />
     </div>
   );
 }

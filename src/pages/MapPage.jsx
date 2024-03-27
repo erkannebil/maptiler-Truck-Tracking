@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Map from '../components/Map';
 import TableContainer from '../components/MapTable';
-import '../components/cssFiles/mapPage.css';
+import Grid from '@mui/material/Grid'; // Material-UI Grid bileşenini ekleyin
+
 
 function MapPage() {
     const [coordinatesData, setCoordinatesData] = useState('');
@@ -19,14 +20,26 @@ function MapPage() {
     
 
     return (
-        <div className='main-container'>
-            <div className='left-part'>
-                <TableContainer showClick={showClick} />
-            </div>
-            <div className='right-part'>
-                <Map key={mapKey} coordinatesData={coordinatesData} /> {/* Anahtarı Map bileşenine geçir */}
-            </div>
-        </div>
+        <Grid
+            container
+            direction="row"
+            justifyContent="space-around"
+            alignItems="stretch"
+            spacing={5}
+            columns={12}
+            className='main-container'
+        >
+            <Grid item xs={6}>
+                <div className='left-part'>
+                    <TableContainer showClick={showClick} />
+                </div>
+            </Grid>
+            <Grid item xs={6}>
+                <div className='right-part'>
+                    <Map key={mapKey} coordinatesData={coordinatesData} /> {/* Anahtarı Map bileşenine geçir */}
+                </div>
+            </Grid>
+        </Grid>
     );
 }
 

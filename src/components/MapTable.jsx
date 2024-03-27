@@ -141,7 +141,7 @@ function rowContent(_index, row, props) {
 
 export default function ReactVirtualizedTable(props) {
   return (
-    <Paper style={{ height: 720, width: '50%', padding: 5, border: '2px solid black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
+    <Paper style={{ height: 720, width: '105%', padding: 5, border: '2px solid black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
 
 
       <TableVirtuoso
