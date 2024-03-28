@@ -27,23 +27,14 @@ function LoginPage() {
 
 
 
+                
                 const validateResponse = await fetch('https://ingest-test.tingz.net/validate_jwtForMaptiler', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        token: data.jwt  
-                    })
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${data.jwt}` 
+                    }
                 });
-                
-                // const validateResponse = await fetch('https://ingest-test.tingz.net/validate_jwtForMaptiler', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'Authorization': `Bearer ${data.jwt}` 
-                //     }
-                // });
                 debugger
                 if (validateResponse.status === 200) {
                     navigate('/truckPage');

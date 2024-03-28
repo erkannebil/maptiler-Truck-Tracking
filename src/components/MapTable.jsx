@@ -1,5 +1,4 @@
 import React from 'react';
-import  { useState, useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,152 +6,264 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TableVirtuoso } from 'react-virtuoso';
 import { Button } from '@mui/material';
-import ApiObj from "./FetchApi";
 
 
-const [tokenData, setTokenData] = useState(" ");
-const [data, setData] = useState([ ]);
-
-
-useEffect(() => {
-  const fetchData = async () => {
-    const token = await ApiObj.tokenFetchData();
-    setTokenData(token);
-    console.log(token);
-
-    const data = await ApiObj.fetchData(tokenData);
-    setData(data.map(putTheDataOnTemplate)); 
-    console.log(data);
-  };
-
-  fetchData();
-}, []);
-
-
-  const putTheDataOnTemplate = (data) => ({
-    trip_id: data.trip_id,
-    name: data.name,
-    start_time: data.start_time,
-    finish_time: data.finish_time,
-    trip_route: {
-      type: "FeatureCollection",
-      name: "Path Test",
-      features: [
-        {
-          type: "Feature",
-          properties: { name: "Line 1" },
-          geometry: {
-            type: "LineString",
-            coordinates: JSON.parse(data.trip_route) 
-          }
-        }
-      ]
-    }
-  });
-  //B PLANI BU MANTIK ÇALIŞMASSA FORLA DATAYI DÖN SAMPLE GİBİ BİR DİZİ OLUŞTUR ONA PUSH ET VE TABLOYA GÖNDER.
-  
-const sample = [
-  data
+const sampleData = [
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm A",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[[27.949152,37.0839616],[27.949168,37.08396],[27.9492176,37.08396],[27.9457072,37.0861936],[27.9453376,37.0816992]]"
+  },
+  {
+    "trip_id": 1200,
+    "name": "Hüsamlar-Döküm B",
+    "start_time": "2024-03-01T08:21:00.000Z",
+    "finish_time": "2024-03-01T08:29:00.000Z",
+    "trip_route": "[ [ 27.8908299, 37.1600766 ], [ 27.8929757, 37.1592216 ], [ 27.8944348, 37.156588 ], [ 27.8947781, 37.1528598 ], [ 27.8955077, 37.15156 ], [ 27.8962801, 37.1501576 ], [ 27.8962372, 37.1469764 ] ]" },
 ];
 
 
-function createData(trip_id,name, start_time, finish_time,trip_route) {
-  return { trip_id, name, start_time,finish_time, trip_route };
+function formatDateTime(dateTimeString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  const dateTime = new Date(dateTimeString);
+  return new Intl.DateTimeFormat('tr-TR', options).format(dateTime);
 }
 
-const columns = [
-  { width: 200, label: "Sefer Adı", dataKey: "name" },
-  { width: 120, label: "Başlangıç Tarihi", dataKey: "start_time", numeric: false },
-  { width: 120, label: "Bitiş Tarihi", dataKey: "finish_time", numeric: false },
-  { width: 120, label: "Coordinates", dataKey: "trip_route", numeric: false },
-  { width: 120, label: "Action", dataKey: "action", numeric: false },
-];
-
-const rows = Array.from({ length: 200 }, (_, index) => {
-  const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-  return createData(index, ...randomSelection);
-});
-
-const VirtuosoTableComponents = {
-  Scroller: React.forwardRef((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
-  ),
-  TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-  TableBody: React.forwardRef((props, ref) => <TableBody {...props} ref={ref} />),
+const processSampleData = (data) => {
+  return data.map((item) => ({
+    trip_id: item.trip_id,
+    name: item.name,
+    start_time: item.start_time,
+    finish_time: item.finish_time,
+    trip_route: item.trip_route
+  }));
 };
 
-function fixedHeaderContent() {
-  return (
-    <TableRow>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          variant="head"
-          align={column.numeric || false ? 'right' : 'left'}
-          style={{ wtrip_idth: column.wtrip_idth }}
-          sx={{
-            backgroundColor: 'background.paper',
-          }}
-        >
-          {column.start_time}
+
+
+const columns = [
+  { label: "Sefer Adı", dataKey: "name" },
+  { label: "Başlangıç Tarihi", dataKey: "start_time" },
+  { label: "Bitiş Tarihi", dataKey: "finish_time" },
+  { label: "Rota Koordinatları", dataKey: "trip_route" },
+];
+
+function ReactVirtualizedTable({ showClick, data }) {
+  const [rows, setRows] = React.useState(processSampleData(sampleData));
+  const renderTableHeader = () => (
+    <TableHead>
+      <TableRow>
+        {columns.map((column, index) => (
+          <TableCell key={index}>
+            {column.label}
+          </TableCell>
+        ))}
+        <TableCell>Aksiyonlar</TableCell>
+      </TableRow>
+    </TableHead>
+  );
+
+  const renderTableRow = (row, rowIndex, props) => (
+    <TableRow key={rowIndex}>
+      {columns.map((column, colIndex) => (
+        <TableCell key={colIndex}>
+          {column.dataKey === 'start_time' || column.dataKey === 'finish_time'
+            ? formatDateTime(row[column.dataKey]) 
+            : column.dataKey === 'trip_route'
+            ? 'Coordinates'
+            : row[column.dataKey]}
         </TableCell>
       ))}
+      <TableCell>
+      <Button variant="outlined" onClick={() => props.showClick(row.trip_route)}>Göster</Button>
+      </TableCell>
     </TableRow>
   );
-}
 
-function rowContent(_index, row, props) {
-  return (
-    <React.Fragment>
-      {columns.map((column) => {
-        if (column.dataKey === 'action') {
-          return (
-            <TableCell key={column.dataKey}>
-              <Button variant="outlined" onClick={() => props.showClick(row)}>Show</Button>
-            </TableCell>
-          );
-        } else if (column.dataKey === 'trip_route') {
-          return (
-            <TableCell
-              key={column.dataKey}
-              align={column.numeric || false ? 'right' : 'left'}
-            >
-              Coordinates
-            </TableCell>
-          );
-        } else {
-          return (
-            <TableCell
-              key={column.dataKey}
-              align={column.numeric || false ? 'right' : 'left'}
-            >
-              {row[column.dataKey]}
-            </TableCell>
-          );
-        }
-      })}
-    </React.Fragment>
-  );
-}
-
-
-export default function ReactVirtualizedTable(props) {
   return (
     <Paper style={{ height: 720, wtrip_idth: '105%', padding: 5, border: '2px soltrip_id black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
-
-
-      <TableVirtuoso
-        data={rows}
-        components={VirtuosoTableComponents}
-        fixedHeaderContent={fixedHeaderContent}
-        itemContent={(index, row) => rowContent(index, row, props)}
-      />
+      <TableContainer component={Paper} style={{ maxHeight: '705px', overflow: 'auto',borderRadius: 20 }}>
+  <Table stickyHeader aria-label="sticky table">
+    {renderTableHeader()}
+    <TableBody>
+      {rows.map((row, index) => renderTableRow(row, index, { showClick }))}
+    </TableBody>
+  </Table>
+</TableContainer>
     </Paper>
   );
 }
+
+export default ReactVirtualizedTable;
+
+
+
+
+
+
+
+

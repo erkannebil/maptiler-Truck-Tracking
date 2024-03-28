@@ -19,7 +19,7 @@ export default function App() {
             <Route path="/home" element={<PrivateRoute><TruckPage /></PrivateRoute>} />
             <Route path="/truckPage" element={<TruckPage />} />
             <Route path="/mapPage" element={<MapPage />} />
-            <Route path="/mapPage/:truckName" element={<PrivateRoute><MapPage /></PrivateRoute>} />
+            <Route path="/mapPage/:truckName" element={<MapPage />} />
 
 
           </Routes>
@@ -28,9 +28,3 @@ export default function App() {
     </Router>
   );
 }
-
-
-
-// jwt,  assetid, tenantid, startdate, finishdate alıcak restservice yollanacak. gelen json yapısı 
-//mobil görünüm renposive ayarla.
-//next.jse bak.
