@@ -1,4 +1,5 @@
 import React from 'react';
+import  { useState, useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,63 +9,65 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import { Button } from '@mui/material';
+import ApiObj from "./FetchApi";
 
 
-var line1 = {
-  "type": "FeatureCollection",
-  "name": "Path Test",
-  "features": [
-    { "type": "Feature", "properties": { "Name": "Line 1" }, "geometry": { "type": "LineString", "coordinates": [[27.8908299, 37.1600766], [27.8929757, 37.1592216], [27.8944348, 37.156588], [27.8947781, 37.1528598], [27.8955077, 37.15156], [27.8962801, 37.1501576], [27.8962372, 37.1469764]] } }
-  ]
-};
-var line2 = {
-  "type": "FeatureCollection",
-  "name": "Path Test",
-  "features": [
-    { "type": "Feature", "properties": { "Name": "Line 2" }, "geometry": { "type": "LineString", "coordinates": [ [ 27.8982113, 37.1495419 ], [ 27.896881, 37.1530308 ], [ 27.8958081, 37.1538175 ], [ 27.8912161, 37.1560408 ] ] } }]
-  };
-var line3 = {
-  "type": "FeatureCollection",
-  "name": "Path Test",
-  "features": [
-  { "type": "Feature", "properties": { "Name": "Line 3" }, "geometry": { "type": "LineString", "coordinates": [ [ 27.8950356, 37.1600766 ], [ 27.895336, 37.1571695 ], [ 27.895851, 37.1547068 ], [ 27.8982113, 37.1530308 ], [ 27.8994988, 37.1499523 ], [ 27.898383, 37.1480026 ] ] } }
-  ]
+const [tokenData, setTokenData] = useState(" ");
+const [data, setData] = useState([ ]);
+
+
+useEffect(() => {
+  const fetchData = async () => {
+    const token = await ApiObj.tokenFetchData();
+    setTokenData(token);
+    console.log(token);
+
+    const data = await ApiObj.fetchData(tokenData);
+    setData(data.map(putTheDataOnTemplate)); 
+    console.log(data);
   };
 
+  fetchData();
+}, []);
+
+
+  const putTheDataOnTemplate = (data) => ({
+    trip_id: data.trip_id,
+    name: data.name,
+    start_time: data.start_time,
+    finish_time: data.finish_time,
+    trip_route: {
+      type: "FeatureCollection",
+      name: "Path Test",
+      features: [
+        {
+          type: "Feature",
+          properties: { name: "Line 1" },
+          geometry: {
+            type: "LineString",
+            coordinates: JSON.parse(data.trip_route) 
+          }
+        }
+      ]
+    }
+  });
+  //B PLANI BU MANTIK ÇALIŞMASSA FORLA DATAYI DÖN SAMPLE GİBİ BİR DİZİ OLUŞTUR ONA PUSH ET VE TABLOYA GÖNDER.
+  
 const sample = [
-  ['Sefer-1', 'Label', line1],
-  ['Sefer-2', 'Label', line2],
-  ['Sefer-3', 'Label', line3],
+  data
 ];
 
-function createData(id, Name, label, features) {
-  return { id, Name, label, features };
+
+function createData(trip_id,name, start_time, finish_time,trip_route) {
+  return { trip_id, name, start_time,finish_time, trip_route };
 }
 
 const columns = [
-  {
-    width: 200,
-    label: 'Sefer Adı',
-    dataKey: 'Name',
-  },
-  {
-    width: 120,
-    label: 'Label',
-    dataKey: 'label',
-    numeric: false,
-  },
-  {
-    width: 120,
-    label: 'Features',
-    dataKey: 'Coordinates',
-    numeric: false,
-  },
-  {
-    width: 120,
-    label: 'Action',
-    dataKey: 'action',
-    numeric: false,
-  },
+  { width: 200, label: "Sefer Adı", dataKey: "name" },
+  { width: 120, label: "Başlangıç Tarihi", dataKey: "start_time", numeric: false },
+  { width: 120, label: "Bitiş Tarihi", dataKey: "finish_time", numeric: false },
+  { width: 120, label: "Coordinates", dataKey: "trip_route", numeric: false },
+  { width: 120, label: "Action", dataKey: "action", numeric: false },
 ];
 
 const rows = Array.from({ length: 200 }, (_, index) => {
@@ -92,12 +95,12 @@ function fixedHeaderContent() {
           key={column.dataKey}
           variant="head"
           align={column.numeric || false ? 'right' : 'left'}
-          style={{ width: column.width }}
+          style={{ wtrip_idth: column.wtrip_idth }}
           sx={{
             backgroundColor: 'background.paper',
           }}
         >
-          {column.label}
+          {column.start_time}
         </TableCell>
       ))}
     </TableRow>
@@ -114,7 +117,7 @@ function rowContent(_index, row, props) {
               <Button variant="outlined" onClick={() => props.showClick(row)}>Show</Button>
             </TableCell>
           );
-        } else if (column.dataKey === 'Coordinates') {
+        } else if (column.dataKey === 'trip_route') {
           return (
             <TableCell
               key={column.dataKey}
@@ -141,7 +144,7 @@ function rowContent(_index, row, props) {
 
 export default function ReactVirtualizedTable(props) {
   return (
-    <Paper style={{ height: 720, width: '105%', padding: 5, border: '2px solid black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
+    <Paper style={{ height: 720, wtrip_idth: '105%', padding: 5, border: '2px soltrip_id black', borderRadius: 20, marginLeft: 5, marginRight: 5, marginTop: 8 }}>
 
 
       <TableVirtuoso
